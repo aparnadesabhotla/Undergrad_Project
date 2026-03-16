@@ -1,0 +1,29 @@
+{% extends "blog/detail.html" %}
+{% load form_tags_filters %}
+
+{% block answer_add_form %}
+    <form class="form" style="width: inherit" id="answer-add-form" action="{% url 'blog:answer-add' question.id %}" method="post">
+        {% csrf_token %}
+        <ul>
+            {% for field in answer_add_form %}
+                {% with field=field|label_suffix:'' %}
+                    <li>
+                        {% with field=field|label:'Answer' %}
+                            {{ field.label_tag }}
+                            {{ field|placeholder:'Write your answer' }}
+                        {% endwith %}
+                        {{ field.errors }}
+                        {% if field.help_text %}
+                            <div class="help-text">{{ field.help_text }}</div>
+                        {% endif %}
+                    </li>
+                {% endwith %}
+            {% endfor %}
+        </ul>
+        <div class="form-buttons">
+            <input class="button" type="submit" value="Post">
+            <a href="{% url 'blog:question-detail' question.id %}" class="button" id="hide-answer-add-form-button">Cancel</a>
+        </div>
+    </form>
+{% endblock answer_add_form %}
+

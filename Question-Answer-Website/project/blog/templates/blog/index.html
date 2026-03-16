@@ -1,0 +1,42 @@
+{% extends "project/base.html" %}
+
+{% block content %}
+    {% if questions_list %}
+        <ul class="questions-list">
+            {% for question in questions_list %}
+                {% with answers=question.answer_set.all %}
+                    <li class="question-card">
+                        <h2 class="question-title"><a href="{% url 'blog:question-detail' question.id %}">{{ question.title }}</a></h2>
+                        <p class="question-body-preview">{{ question.body }}</p>
+                        <ul class="question-info">
+                            <div>
+                                <li>asked by <a href="{% url 'user:profile' question.author.id %}" class="question-author">{{ question.author }}</a> on {{ question.published|date:"F d, Y" }} at {{ question.published|date:"H:i" }}</li>
+                                <li>
+                                    {% if answers.count %}
+                                        has {{ answers.count }} answer{{ answers.count|pluralize }} given by:
+                                        {% for answer in answers %}
+                                            {% if forloop.counter <= 3 %}
+                                                {% if forloop.counter == answers.count %}
+                                                    <a href="{% url 'user:profile' answer.author.id %}" class="answer-author">{{ answer.author.username }}</a>
+                                                {% else %}
+                                                    <a href="{% url 'user:profile' answer.author.id %}" class="answer-author">{{ answer.author.username }}</a>,
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if answers.count > 3 %}
+                                            and others
+                                        {% endif %}
+                                    {% else %}
+                                        has 0 answers
+                                    {% endif %}
+                                </li>
+                            </div>
+                        </ul>
+                    </li>
+                {% endwith %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty-questions-list">No questions are available.</p>
+    {% endif %}
+{% endblock content %}

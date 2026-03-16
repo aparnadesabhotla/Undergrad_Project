@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question and Answer Website</title>
+
+    <meta name="description" content="A platform for talking about programming.">
+    <meta name="keywords", content="C, C++, C#, Go, Python, MQL, HTML, CSS, JavaScript">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'project/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'user/style.css' %}">
+</head>
+<body>
+    <nav class="nav-bar">
+        <ul>
+            <div class="nav-bar-left">
+                <li><a href="{% url 'blog:question-index' %}">Welcome to QandA</a></li>
+                <li><a href="{% url 'blog:question-index' %}">Home</a></li>
+            </div>
+            <div class="nav-bar-right">
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'user:logout' %}">Logout</a></li>
+                    <li><a href="{% url 'user:profile' request.user.id %}">Profile</a></li>
+                    <li><a href="{% url 'blog:question-ask' %}">Ask Question</a></li>            
+                {% else %}
+                    <li><a href="{% url 'user:login' %}">Login</a></li>
+                    <li><a href="{% url 'user:register' %}">Register</a></li>
+                {% endif %}
+            </div>               
+        </ul>
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+    <script src="{% static 'user/profile.js' %}"></script>
+</body>
+</html>

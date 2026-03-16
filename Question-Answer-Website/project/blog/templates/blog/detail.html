@@ -1,0 +1,60 @@
+{% extends "project/base.html" %}
+{% load form_tags_filters %}
+
+{% block content %}
+    <ul class="questions-list">
+        <li class="question-card">
+            <h2 class="question-title">{{ question.title }}</h2>
+            <p class="question-body">{{ question.body }}</p>
+            <ul class="question-info">
+                <div>
+                    <li>asked by <a href="{% url 'user:profile' question.author.id %}" class="question-author">{{ question.author }}</a> on {{ question.published|date:"F d, Y" }} at {{ question.published|date:"H:i" }}</li>
+                    {% if question.updated != question.published %}
+                        <li>updated on {{ question.updated|date:"F d, Y" }} at {{ question.updated|date:"H:i" }}</li>
+                    {% endif %}
+                </div>
+                <div>
+                    <li><a href="{% url 'blog:question-edit' question.id %}">edit</a></li>
+                    <li><a href="{% url 'blog:question-delete' question.id %}">delete</a></li>
+                </div>
+            </ul> 
+        </li>
+    </ul>
+    {% block answer_add_form %}
+    {% endblock answer_add_form %}
+    <ul class="answers-list">
+        <h3 class="answers-header">
+            <div>
+                {% if answers.count %}
+                    {{ answers.count }} Answer{{ answers.count|pluralize }}
+                {% else %}
+                    0 Answers
+                {% endif %}                
+            </div>
+            {% if answer_add_form == None %}
+                <div>
+                    <a href="{% url 'blog:answer-add' question.id %}" class="button" id="show-answer-add-form-button">Post Your Answer</a>
+                </div>
+            {% endif %}
+        </h3>
+        {% for answer in answers %}
+            <li class="answer-card">
+                <p class="answer-body">{{ answer.body }}</p>
+                <ul class="answer-info"> 
+                    <div>
+                        <li>answered by <a href="{% url 'user:profile' answer.author.id %}" class="answer-author">{{ answer.author.username }}</a> on {{ answer.published|date:"F d, Y" }} at {{ answer.published|date:"H:i" }}</li>
+                    </div>
+                    <div>
+                        <li><a href="{% url 'blog:answer-edit' question.id answer.id %}">edit</a></li>
+                        <li><a href="{% url 'blog:answer-delete' question.id answer.id %}">delete</a></li>
+                    </div>
+                </ul>
+            </li>
+            {% block answer_edit_form %}
+            {% endblock answer_edit_form %}
+
+            {% block answer_delete_form %}
+            {% endblock answer_delete_form %}
+        {% endfor %}
+    </ul>
+{% endblock content %}

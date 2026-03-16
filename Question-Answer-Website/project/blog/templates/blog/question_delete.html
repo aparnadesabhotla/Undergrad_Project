@@ -1,0 +1,27 @@
+{% extends "project/base.html" %}
+
+{% block content %}
+    <ul class="questions-list">
+        <li class="question-card">
+            <h2 class="question-title">{{ question.title }}</h2>
+            <p class="question-body-preview">{{ question.body }}</p>
+            <ul class="question-info">
+                <div>
+                    <li>asked by <span class="question-author">{{ question.author }}</span> on {{ question.published|date:"F d, Y" }} at {{ question.published|date:"H:i" }}</li>
+                    {% if question.updated != question.published %}
+                        <li>updated on {{ question.updated|date:"F d, Y" }} at {{ question.updated|date:"H:i" }}</li>
+                    {% endif %}
+                </div>
+            </ul> 
+        </li>
+    </ul>
+    <form class="form" action="{% url 'blog:question-delete' question.id %}" method="post">
+        {% csrf_token %}
+        <h4 class="form-title" style="margin-bottom: 0.5rem; margin-top: 0.75rem;">Are you sure that you want to delete the above question?</h4>
+        <div class="form-buttons">
+            <input class="button" type="submit" value="Delete">
+            <a class="button" href="{% url 'blog:question-detail' question.id %}">Cancel</a> 
+        </div>
+    </form>
+{% endblock content %}
+

@@ -1,0 +1,15 @@
+{% extends "blog/detail.html" %}
+{% load form_tags_filters %}
+
+{% block answer_delete_form %}
+    {% if answer.id == answer_selected.id %}
+        <form class="form" style="width: inherit; margin: 0.5rem 0rem; padding: 0.5rem 1rem; background-color: moccasin;" action="{% url 'blog:answer-delete' question.id answer.id %}" method="post">
+            {% csrf_token %}
+            <h4 class="form-title">Are you sure that you want to delete the above answer?</h4>
+            <div class="form-buttons">
+                <input class="button" type="submit" value="Delete">
+                <a class="button" href="{% url 'blog:question-detail' question.id %}">Cancel</a> 
+            </div>
+        </form>
+    {% endif %}
+{% endblock answer_delete_form %}

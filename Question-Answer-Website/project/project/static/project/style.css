@@ -1,0 +1,119 @@
+/* CSS Reset */
+* {
+    margin: 0rem;
+    padding: 0rem;
+    box-sizing: border-box;
+}
+
+
+/* Fonts */
+@font-face {
+    font-family: Quicksand;
+    src: url(./fonts/Quicksand_Regular.ttf);
+}
+
+@font-face {
+    font-family: Quicksand;
+    src: url(./fonts/Quicksand_Bold.ttf);
+    font-weight: bold;
+}
+
+
+/* General Styles */
+body {
+    background-image: url(./images/images2.jpg);
+    background-size: 100%;
+    font-family:Tahoma, sans-serif;
+    line-height: 30px;
+    padding: 0px 25px;
+    margin: 0px 100px;
+}
+
+main {
+    background-color:  #fceeff;
+    padding: 2rem;
+}
+
+a {
+    color: #814d8a;
+    text-decoration: none;   
+}
+
+a:hover {
+    color: #310738;
+}
+
+input, textarea {
+    font-family: inherit;
+    font-size: 0.85rem
+}
+
+
+/* Navigation Bar */
+.nav-bar {
+    background-color: #BA90C6;
+    position: sticky;
+    top: 0rem;
+}
+
+.nav-bar ul {
+    list-style-type: none;
+    overflow: hidden;
+}
+
+.nav-bar-left {
+    float: left;
+    margin-left: 2rem;
+}
+
+.nav-bar-left li{
+    float: left;
+}
+
+.nav-bar-right {
+    float: right;
+    margin-right: 2rem;
+}
+
+.nav-bar-right li {
+    float: right;
+}
+
+.nav-bar-right li a {
+    display: block;
+    font-weight: bold;
+    padding: 0.5rem 0.5rem;
+    margin-left: 0.5rem
+}
+
+.nav-bar-left li a {
+    display: block;
+    font-weight: bold;
+    padding: 0.5rem 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.nav-bar-right li a:hover, .nav-bar-left li a:hover{
+    background-color: #fceeff;
+}
+
+
+/* Utility */
+.button {
+    font-size: 0.8rem;
+    padding-left: 20%;
+    border-style: hidden;
+    border-radius: 0.5rem;
+    color: #fceeff;
+    background-color: #814d8a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.button:hover {
+    color: #814d8a;
+    background-color: #d292e0;
+    cursor: pointer;
+}

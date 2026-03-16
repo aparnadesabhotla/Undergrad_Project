@@ -1,0 +1,43 @@
+{% extends "project/base.html" %}
+{% load form_tags_filters %}
+
+{% block content %}
+    <form class="form" action="{% url 'user:login' %}" method="post">
+        {% csrf_token %}
+        <h2 class="form-title">Login to Your Account</h2>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <ul>
+            {% for field in login_form %}
+                {% with field=field|label_suffix:'' %}
+                    <li>
+                        {% if field.id_for_label == 'id_username' %}
+                            {{ field.label_tag }}
+                            {{ field|placeholder:'Enter your username' }}
+                        {% elif field.id_for_label == 'id_password' %}
+                            {{ field.label_tag }}
+                            {{ field|placeholder:'Enter your password' }}
+                        {% endif %}
+                        {{ field.errors }}
+                        {% if field.help_text %}
+                            <div class="help-text">{{ field.help_text }}</div>
+                        {% endif %}
+                    </li>
+                {% endwith %}
+            {% endfor %}
+            {% if request.GET.next %}
+                <li>
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                </li>
+            {% endif %}
+        </ul>
+        <div class="form-buttons">
+            <input class="button" type="submit" value="Login">
+        </div>
+    </form>
+{% endblock content %}

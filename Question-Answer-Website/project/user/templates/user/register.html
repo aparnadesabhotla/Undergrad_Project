@@ -1,0 +1,48 @@
+{% extends "project/base.html" %}
+{% load form_tags_filters %}
+
+{% block content %}
+    <form class="form" action="{% url 'user:register' %}" method="post">
+        {% csrf_token %}
+        <h2 class="form-title">Create an Account</h2>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <ul>
+            {% for field in register_form %}
+                {% with field=field|label_suffix:'' %}
+                    <li>
+                        {% if field.id_for_label == 'id_username' %}
+                            {{ field.label_tag }}
+                            {{ field|placeholder:'Enter a username' }}
+                        {% elif field.id_for_label == 'id_email' %}
+                            {% with field=field|label:'Email' %}
+                                {{ field.label_tag }}
+                                {{ field|placeholder:'example@domain.com' }}
+                            {% endwith %}
+                        {% elif field.id_for_label == 'id_password1' %}
+                            {{ field.label_tag }}
+                            {{ field|placeholder:'Enter a password' }}
+                        {% elif field.id_for_label == 'id_password2' %}
+                            {% with field=field|label:'Password Confirmation' %}
+                                {{ field.label_tag }}
+                                {{ field|placeholder:'Retype the password' }}
+                            {% endwith %}
+                        {% endif %}
+                        {{ field.errors }}
+                        {% if field.help_text %}
+                            <div class="help-text">{{ field.help_text }}</div>
+                        {% endif %}
+                    </li>
+                {% endwith %}
+            {% endfor %}
+        </ul>
+        <div class="form-buttons">
+            <input class="button" type="submit" value="Sign Up">
+        </div>
+    </form>
+{% endblock content %}

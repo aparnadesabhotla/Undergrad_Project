@@ -1,0 +1,30 @@
+{% extends "blog/detail.html" %}
+{% load form_tags_filters %}
+
+{% block answer_edit_form %}
+    {% if answer.id == answer_selected.id %}
+        <form class="form" style="width: inherit; margin: 0rem; margin-bottom: 0.75rem;" id="answer-edit-form" action="{% url 'blog:answer-edit' question.id answer.id %}" method="post">
+            {% csrf_token %}
+            <ul>
+                {% for field in answer_edit_form %}
+                    {% with field=field|label_suffix:'' %}
+                        <li>
+                            {% with field=field|label:'Edit Answer' %}
+                                {{ field.label_tag }}
+                                {{ field }}
+                            {% endwith %}
+                            {{ field.errors }}
+                            {% if field.help_text %}
+                                <div class="help-text">{{ field.help_text }}</div>
+                            {% endif %}
+                        </li>
+                    {% endwith %}
+                {% endfor %}
+            </ul>
+            <div class="form-buttons">
+                <input class="button" type="submit" value="Update">
+                <a href="{% url 'blog:question-detail' question.id %}" class="button" id="hide-answer-edit-form-button">Cancel</a>
+            </div>
+        </form>
+    {% endif %}
+{% endblock answer_edit_form %}

@@ -1,0 +1,142 @@
+/* Resgiteration and Login Forms */
+.form {
+    width: 50%;
+    margin: 0rem 2rem;
+}
+
+.form .form-title {
+    margin-bottom: 1rem;
+    line-height: 1.25rem;
+}
+
+.form ul {
+    list-style-type: none;
+}
+
+.form > ul li {
+    margin-bottom: 1rem;
+}
+
+.form ul li label {
+    display: block;
+}
+
+.form ul li label::after {
+    content: " *";
+    color: red;
+}
+
+.form ul li textarea {
+    display: block;
+    width: 100%;
+    border-style: hidden;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    resize: none;
+}
+
+.form ul li textarea::placeholder {
+    color: grey;
+    opacity: 0.5;
+}
+
+.form .form-buttons {
+    display: grid;
+    grid-template-columns: 4.5rem 4.5rem;
+    grid-template-rows: 1.75rem;
+    justify-content: start;
+    gap: 0.75rem;
+}
+
+.form ul li input {
+    display: block;
+    width: 100%;
+    height: 2.25rem;
+    border-style: hidden;
+    border-radius: 0.5rem;
+    padding: 0rem 1rem;
+}
+
+.form ul li input::placeholder {
+    color: grey;
+    opacity: 0.5;
+}
+
+.form input[type="password"] {
+    font-size: 0.5rem;
+    letter-spacing: 0.15rem;
+}
+
+.form input[type="password"]::placeholder {
+    font-size: 0.85rem;
+    letter-spacing: normal;
+}
+
+#id_image {
+    border-style: hidden;
+    padding: 0;
+}
+
+.form .help-text {
+    line-height: 1rem;
+    font-size: small;
+    margin-top: 0.75rem;
+    color: grey;
+}
+
+.form .help-text ul li {
+    margin: 0.5rem 0rem;
+}
+
+.form .errorlist {
+    line-height: 1rem;
+    font-size: small;
+    margin-top: 0.75rem;
+    margin-bottom: 1.5rem;
+    color: red;
+}
+
+.form .messages .error {
+    list-style-type: none;
+    color: red;
+    background-color: gainsboro;
+    border-style: hidden;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    line-height: 1.25rem;
+    font-size: small;
+    font-weight: 900;
+}
+
+.form .messages .success, .messages .success {
+    list-style-type: none;
+    color: mediumseagreen;
+    background-color: gainsboro;
+    border-style: hidden;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    line-height: 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 900;
+}
+
+
+/* Profile */
+.profile {
+    padding: 0em 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.profile img {
+    width: 150px;
+    border-radius: 50%;
+    margin-top: 0.75rem;
+}
+
+.profile .biography {
+    line-height: 1.35rem;
+}
